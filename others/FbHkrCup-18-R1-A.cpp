@@ -1,4 +1,4 @@
-// observations :
+// explanation:
 // 1 - # of columns has to be even
 // 2 - the only case we have more than one choice 
 // is if the flow is at a cell in the second row
