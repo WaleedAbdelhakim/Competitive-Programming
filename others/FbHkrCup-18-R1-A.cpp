@@ -1,3 +1,4 @@
+// link : www.facebook.com/hackercup/problem/180494849326631/
 // explanation:
 // 1 - # of columns has to be even
 // 2 - the only case we have more than one choice 
