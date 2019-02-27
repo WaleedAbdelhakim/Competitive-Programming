@@ -1,3 +1,32 @@
+// you need to check 4 things to determine whether the inupt is valid or not 
+// 1 - every char must be a digit or one of these chars "()*+"
+// 2 - if we removed every thing other than brackets 
+// we will end up with a regular bracket sequence 
+// 3 - any number has no leading zeros
+// 4 - any input that is not valid, must have one of these cases in it
+// "()" , ")(" , "(+" , "+)" , "(*" , "*)" , "+*" , "*+"
+// or a digit with "(" after it
+// or ")" with a digit after it
+
+// as it is not allowed to have * or + at the end or at the begin of the input too
+// so we will make input equal to '(' + input + ')'
+
+
+// evaluation
+// it is very easy to evaluate a simple sequence 
+// that only have digits and '*' and '+' in linear time 
+// to handle the brackets we will make a recursive function that takes an index
+// and starting from that index it will keep moving forward
+// and calculating until reaching any closing bracket
+// in case of reaching an open bracket 
+// we will recursively calculate what in that bracket
+// and continue after the close of this bracket 
+// in any call when we reach a close bracket 
+// we will return evaluation of the bracket 
+// and the index of the close bracket + 1 
+// for the previous bracket to continue 
+
+
 #include <bits/stdc++.h>
 
 using namespace std;
