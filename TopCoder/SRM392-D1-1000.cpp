@@ -4,9 +4,10 @@
    it means , is there a way to fill the rightmost i + 1 digits knowing that 
    the number I'm currently forming is already  greater than the input if 
    g is 1 or still equal to it if g is 0, and having the frequency of each digit
-   stored in f.
+   stored in f to determine at the end whether the number is equadigit or not
 
-   the reason why this passes is that I ignore subproblems that lead to invalid freq       arrays , and the number of valid freq arrays is small.
+   the reason why this passes is that I ignore subproblems 
+   that lead to invalid freq arrays, and the number of valid freq arrays is small.
    a valid freq array can't have a sum of frequencies greater than 19,
    and if we increased every non zero frequency to be equal to the maximum
    the sum of added values must be smaller than or equal to i + 1
