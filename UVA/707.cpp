@@ -1,3 +1,18 @@
+/*
+   let can[x] be the set of possible cells for the robber at time x. 
+   initially can[x] contains all cells that lie on none of the messages at time x.
+   knowing that the robber can move at most one unit per time step , 
+   we can update can[x] according to can[x - 1] and can[x + 1].
+
+   if cell (x , y) is in can[x] then there must be cell in can[x - 1] 
+   that is one step far from it, as well as in can[x + 1]
+
+   if for some x can[x] is empty that means the robber escaped.
+   if can[x] has one cell then the robber's location can be deduced at time x.
+   if for all sets no set has exactly one cell then there is nothing known.
+*/
+
+
 #include <bits/stdc++.h>
 
 using namespace std;
