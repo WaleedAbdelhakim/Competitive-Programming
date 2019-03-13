@@ -26,6 +26,7 @@ int main() {
     ios::sync_with_stdio(0) , cin.tie(0) , cout.tie(0);
 #ifndef ONLINE_JUDGE
     freopen("input.in" , "r" , stdin);
+    freopen("output.out" , "w" , stdout);
 #endif
     int test = 1;
     while (cin >> n , n) {
@@ -60,7 +61,7 @@ int main() {
         if (ans.size()) {
             cout << "Case " << test++ << ", " << ans.size() << " concurrent events:\n";
             for (int i = 0 ;i < min((int)ans.size() , 2) ;i++)
-                cout << (i ? " " : "") << '(' << info[ans[i].first] << ',' << info[ans[i].second] << ')';
+                cout << '(' << info[ans[i].first] << ',' << info[ans[i].second] << ") ";
             cout << '\n';
         } else
             cout << "Case " << test++ << ", no concurrent events.\n";
