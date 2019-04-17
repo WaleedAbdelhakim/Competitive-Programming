@@ -1,3 +1,9 @@
+// let A and B be the supercomputers we want to disconnect 
+// run maxflow with source = A and sink = B
+// and get the set of edges that represent the cut 
+// then recalculate the cut with source = B and sink = A
+// if there are multiple solutions the two cuts will never be the same 
+
 #include <bits/stdc++.h>
 using namespace std;
 
