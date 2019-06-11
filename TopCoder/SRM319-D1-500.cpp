@@ -51,11 +51,4 @@ public:
     }
 };
 
-int main() {
-#ifndef ONLINE_JUDGE
-    freopen("input.in" , "r" , stdin);
-#endif
-    ConstructBST test;
-    cout << test.numInputs(
-            {1, 3, 6});
-}
+
