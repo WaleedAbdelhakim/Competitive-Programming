@@ -1,3 +1,26 @@
+/*
+    let N be the size of the string
+    let A be the number of unique permutations of the string (the answer)
+
+    in case every character is unique the answer is   N!
+
+    otherwise   
+    the answer is N! but we need to subtract the duplicates
+    for every char with frequency X, it is causing every permutation of A to be counted X! times 
+    e.g. every unique permutation  of "abca" will be counted twice because of the 'a'
+    
+    so we can divide the answer by the factorial of every char's frequency
+    answer = N! / (X1! * X2! * x3! .....)
+
+    the last non zero digit :
+    if we are to know that the answer has no zeros then the output is answer % 10 
+    
+    so we will make sure that the answer % 10 != 0
+    we can do that by maintaining the prime factors of the answer before multiplying them
+    and to subtract every pair of 5 and 2 until there is no 5 or no 2
+    then you can multiply the rest while getting the mod over 10          
+*/
+
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -30,7 +53,6 @@ int main() {
         int f[26] = {};
         for (char c : s) f[c - 'a']++;
         for (int i = 0; i < 26; i++) for (int j = 2; j <= f[i]; j++) pf(j, -1);
-        factors[10] = 0;
         int sub = min(factors[2], factors[5]);
         factors[2] -= sub;
         factors[5] -= sub;
