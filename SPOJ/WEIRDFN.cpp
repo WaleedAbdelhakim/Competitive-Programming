@@ -24,24 +24,9 @@ struct median_tracker {
     }
 
     void insert(long long x) {
-        int sz = a.size() + b.size();
-        if (sz&1) {
-            if (x >= a.top())
-                b.push(x);
-            else  {
-                a.push(x);
-                b.push(a.top());
-                a.pop();
-            }
-        } else {
-            if (!a.size() || x <= a.top())
-                a.push(x);
-            else {
-                b.push(x);
-                a.push(b.top());
-                b.pop();
-            }
-        }
+        a.size() == b.size() ? b.push(x) : a.push(x);
+        if (b.size() > a.size()) a.push(b.top()) , b.pop();
+        if (a.size() - 1 > b.size()) b.push(a.top()) , a.pop();
     }
 };
 
