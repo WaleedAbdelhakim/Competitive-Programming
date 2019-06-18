@@ -2,52 +2,24 @@
 
 using namespace std;
 
-struct DSU{
-    vector<int> par, size;
-    int CC;
-    DSU(int n){
-        CC = n;
-        par.resize(n+1);
-        size.assign(n+1, 1);
-        iota(par.begin(), par.end(), 0);
-    }
-    int root(int a){
-        return par[a] == a ? a: par[a] = root(par[a]);
-    }
-    void unite(int a,int b){
-        a = root(a);
-        b = root(b);
-        if(a == b) return;
-        if(size[a] < size[b]) swap(a,b);
-
-        par[b] = a;
-        size[a] += size[b];
-        --CC;
-    }
-    bool same(int a,int b){
-        return root(a) == root(b);
-    }
-};
-
-const int N = 1e4 + 5;
-int a[N] , b[N];
+const int N = 1e3 + 5;
+bool badR[N] , badC[N];
 
 int main() {
-    int n , m , st  , en;
+#ifndef ONLINE_JUDGE
+    freopen("input.in", "r", stdin);
+#endif
+    int n , m , r , c;
     scanf("%d%d" , &n , &m);
-    for (int i = 0 ;i < m ;i++)
-        scanf("%d%d" , a + i, b + i);
 
-    int q;
-    scanf("%d" , &q);
-    while (q--) {
-        scanf("%d%d" , &st , &en);
-        DSU dsu(n);
-        for (int i = 0 ;i < st - 1 ;i++)
-            dsu.unite(a[i] , b[i]);
-        for (int i = en ;i < m ;i++)
-            dsu.unite(a[i] , b[i]);
-
-        printf("%d\n" , dsu.CC);
+    while (m--) {
+        scanf("%d%d" , &r , &c);
+        badR[r] = badC[c] = 1;
     }
+
+    int ans = n&1 ? (!badR[(n + 1) / 2] || !badC[(n + 1) / 2]) : 0;
+    for (int i = 2 ;i * 2 <= n ;i++)
+        ans += !badR[i] + !badC[i] + !badR[n - i + 1] + !badC[n - i + 1];
+
+    printf("%d" , ans);
 }
