@@ -3,7 +3,6 @@
 using namespace std;
 
 const int N = 1e5 + 5;
-int arr[N];
 
 struct node {
     int sum = 0;
