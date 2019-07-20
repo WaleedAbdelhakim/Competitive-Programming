@@ -1,4 +1,9 @@
-// O(n^3 + m*n^2)
+// for every possible start of the cycle s [1 , n] we will choose the length of the cycle k [1 , n]
+// and using dp we will find the minmum cycle length starting from node s with length exactly k 
+// and minimize the answer with the mean of the bestCycle : (bestCycleLen / k) 
+// dp complexity for each start O(n^2)
+// total complexity O(n^3)
+
 
 #include <bits/stdc++.h>
 
