@@ -25,9 +25,6 @@ const int N = 105;
 int f[N] ;
 
 int main() {
-#ifndef ONLINE_JUDGE
-    freopen("input.in" , "r" , stdin);
-#endif
     int n , t , x;
     scanf("%d%d" , &n , &x);
     for (int i = 0 ;i < n ;i++)
