@@ -93,9 +93,6 @@ void compress() {
 }
 
 int main() {
-#ifndef ONLINE_JUDGE
-    freopen("input.in", "r", stdin);
-#endif
     scanf("%d%d", &n, &k);
     for (int i = 0; i < n; i++) {
         scanf("%d", arr + i);
