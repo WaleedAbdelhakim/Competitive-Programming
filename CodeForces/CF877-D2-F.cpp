@@ -2,7 +2,7 @@
 
 using namespace std;
 
-const int N = 1e5 + 5, M = 1e5 + 5; // array len / number of queries
+const int N = 1e5 + 5, M = 1e5 + 5; 
 int n, q, k;
 int arr[N], st[M], en[M], ind[M];
 int new_pre[N], new_suff[N], new_pre_comp[N], new_suff_comp[N];
