@@ -2,7 +2,7 @@
 
 using namespace std;
 
-const int N = 1e5 + 5, M = 1e5 + 5; 
+const int N = 1e5 + 5, M = 1e5 + 5; // array len / number of queries
 int n, q, k;
 int arr[N], st[M], en[M], ind[M];
 int new_pre[N], new_suff[N], new_pre_comp[N], new_suff_comp[N];
@@ -44,25 +44,16 @@ void mo() {
     int s = 0, e = -1;
     for (int j = 0; j < q; j++) {
         int i = ind[j];
-        if (st[i] <= s) {
-            while (s > st[i])
-                add(--s, 0, e);
-            while (s < st[i])
-                rem(s++, 0, e);
-            while (e > en[i])
-                rem(e--, 1, s);
-            while (e < en[i])
-                add(++e, 1, s);
-        } else {
-            while (e > en[i])
-                rem(e--, 1, s);
-            while (e < en[i])
-                add(++e, 1, s);
-            while (s > st[i])
-                add(--s, 0, e);
-            while (s < st[i])
-                rem(s++, 0, e);
-        }
+
+        while (e > en[i])
+            rem(e--, 1, min(s , e));
+        while (e < en[i])
+            add(++e, 1, s);
+        while (s > st[i])
+            add(--s, 0, e);
+        while (s < st[i])
+            rem(s++, 0, e);
+
 
         ans[i] = cnt;
     }
