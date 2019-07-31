@@ -117,6 +117,9 @@ public:
 };
 
 int main() {
+#ifndef ONLINE_JUDGE
+    freopen("input.in" , "r" , stdin);
+#endif
     int n , q , u , v;
     scanf("%d%d" , &n , &q);
     for (int i = 0 ;i < n - 1 ;i++) {
