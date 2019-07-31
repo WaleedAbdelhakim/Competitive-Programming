@@ -2,7 +2,7 @@
 
 using namespace std;
 
-const int N = 1e5 + 5; // number of nodes
+const int N = 1e5 + 5;
 int hvy[N] , par[N] , dep[N] , head[N] , pos[N] , node[N];
 vector<int> adj[N];
 
@@ -117,9 +117,6 @@ public:
 };
 
 int main() {
-#ifndef ONLINE_JUDGE
-    freopen("input.in" , "r" , stdin);
-#endif
     int n , q , u , v;
     scanf("%d%d" , &n , &q);
     for (int i = 0 ;i < n - 1 ;i++) {
