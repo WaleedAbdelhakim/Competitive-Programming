@@ -9,12 +9,12 @@
 
 //    we can do this using BIT
 //    about the first black node we can find that in log(n) 
-//    using the trick following blog: codeforces.com/blog/entry/61364
+//    using the trick in the following blog: codeforces.com/blog/entry/61364
 
 // notes :
 //     this code is general so it works for every start not necessarily 1.
-//     instead of using BIT for each chain, I use one BIT for all chains 
-//     we can use segment tree or a set instead of BIT
+//     instead of using BIT for each chain, I use one BIT for all chains
+//     we can use segment tree instead of BIT
 
 #include <bits/stdc++.h>
 
