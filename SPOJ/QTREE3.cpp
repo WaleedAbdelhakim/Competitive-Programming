@@ -1,3 +1,21 @@
+// idea :
+//    for each query of the second type we will get the ranges inside the chains that represent the path from node 1 to a,    
+//    then iterate over them in their order in the path and then find the first range to have black nodes.
+//    our answer will be the first black node in this range.
+//    so for every chain we need a data structure that allows the following operations :
+//    1: ask how many black nodes in a range inside the chain.
+//    2: flip the ith node in the chain (for the first query).
+//    3: get the first black node in a range inside the chain.
+
+//    we can do this using BIT
+//    about the first black node we can find that in log(n) 
+//    using the trick following blog: codeforces.com/blog/entry/61364
+
+// notes :
+//     this code is general so it works for every start not necessarily 1.
+//     instead of using BIT for each chain, I use one BIT for all chains 
+//     we can use segment tree or a set instead of BIT
+
 #include <bits/stdc++.h>
 
 using namespace std;
