@@ -11,7 +11,7 @@ vector<vector<int> > comps;
 
 int dfs(int node , int par) {
     if(vis[node])
-        return vis[node] == 1 ? low[node] : 1e9; // return low[node] if visited and in the same SCC , black / gray = gray
+        return vis[node] == 1 ? low[node] : 1e9;  // return low[node] if visited and in the same SCC , black / gray = gray
 
     dfsTime[node] = low[node] = Time++;
     vis[node] = 1;
