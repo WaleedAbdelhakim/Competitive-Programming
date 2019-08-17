@@ -1,3 +1,24 @@
+// explanation :
+//     as we can move between any two cities in the same SCC in no time,
+//     we will only care about edges connecting nodes from different SCCs
+//     so we will construct a tree with every SCC compressed in a node
+//     this tree will have an edge going from node x to node y
+//     if there exists a node in component[x] connected to a node in component[y] in the original graph
+//     note: this might lead to multiple edges
+//     now we have a simpler problem: given a weighted tree find the node that minimizes the maximum distance 
+//     let a sequence V = {a0 , a1 , a2 ... , ak} be the nodes of one of the tree dimeters
+//     and d[x] be the shortest path from node a0 to node x
+//     and rd[x] be the shortest path from node ak to node x
+//     it can be proofed that the node we are searching for is in V
+//     and that there will be at most 2 candidates for it
+//     let D be the tree diameter 
+//     the first candidate will be the last node x in V such that d[x] <= D / 2
+//     the second candidate will be the first node x in V such that d[x] >= D / 2
+//     and then calculate for each one of them what is the longest brach with it begin the center of the tree
+//     to make it easier we can do this for every node in the V without finding the candidates
+//     longest branch with x in the center is max(d[x] , rd[x])
+//     reminder: if there is more than one answer print the one with the smallest label 
+
 #include <bits/stdc++.h>
  
 using namespace std;
