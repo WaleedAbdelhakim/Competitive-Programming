@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+const int N = 1005; // number of nodes in the tree
+vector<int> adj[N]; // adj must be undirected tree
+int Deg[N];
+
+pair<int , vector<int>> getDimeter(vector<int> &nodes) { // all nodes in one connected component
+    vector<int> centers;
+    queue<int> leafs;
+    for (int x : nodes) {
+        Deg[x] = adj[x].size();
+        if(Deg[x] == 1) // because undirected
+            leafs.push(x);
+    }
+
+    if (nodes.size() <= 2)
+        return {nodes.size() - 1 , nodes};
+
+    int d = 0;
+    int cnt = nodes.size();
+    while(cnt > 2) {
+        int sz = leafs.size();
+        d += 2;
+        cnt -= sz;
+        while(sz--) {
+            int cur = leafs.front();
+            leafs.pop();
+            for (int par : adj[cur]) {
+                Deg[par]--;
+                if(Deg[par] == 1)
+                    leafs.push(par);
+            }
+        }
+    }
+
+
+    while(leafs.size())
+        centers.push_back(leafs.front()) , leafs.pop();
+
+    return {d + (centers.size() == 2) , centers};  // returns dimeter and centers
+}
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("input.in", "r", stdin);
+#endif
+
+}

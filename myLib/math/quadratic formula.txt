@@ -1,0 +1,4 @@
+pair<long long , long long> Quadratic_Formula(long long a, long long b, long long c) {
+    long long sqt = sqrt(b * b - 4 * a * c);
+    return {(-b + sqt) / (2 * a), (-b - sqt) / (2 * a)};
+}

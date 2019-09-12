@@ -1,0 +1,25 @@
+void spfa() {
+    memset(dist , '?' , sizeof dist);
+    queue<int> q;
+    q.push(src);
+    dist[src] = 0;
+    inq[src] = 1;
+    for (int i = 0 ;i < n && q.size() ;i++) {
+        int sz = q.size();
+        while (sz--) {
+            int cur = q.front();
+            inq[cur] = 0;
+            q.pop();
+            for (auto &e : adj[cur]) {
+                if (dist[e.to] > dist[cur] + e.cost) {
+                    dist[e.to] = dist[cur] + e.cost;
+                    par[e.to] = cur;
+                    if (!inq[e.to]) {
+                        inq[e.to] = 1;
+                        q.push(e.to);
+                    }
+                }
+            }
+        }
+    }
+}

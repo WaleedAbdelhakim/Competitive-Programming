@@ -1,0 +1,7 @@
+long long power(long long a , long long b) {
+    if (!b) return 1;
+    long long r = power(a , b / 2);
+    r = r * r % MOD;
+    if (b&1) return r * a % MOD;
+    return r;
+}

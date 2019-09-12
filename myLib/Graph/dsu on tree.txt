@@ -1,0 +1,46 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+const int N = 1e5 + 5;
+int sz[N] , in[N];
+vector<int> adj[N] , e;
+
+int dfs(int u , int p) { // call first as a pre process
+    sz[u] = 1;
+    in[u] = e.size();
+    e.push_back(u);
+    for (int v : adj[u])
+        if (v != p)
+            sz[u] += dfs(v , u);
+    return sz[u];
+}
+
+void update (int node) {
+}
+
+void dsu(int u , int p , bool keep) { //
+    int mx = -1 , bigChild = -1;
+    for (int v : adj[u])
+        if (v != p && sz[v] > mx)
+            mx = sz[v] , bigChild = v;
+
+    for (int v : adj[u])
+        if (v != p && v != bigChild)
+            dsu(v , u , 0); // update and do not keep
+
+    if (bigChild != -1)
+        dsu(bigChild , u , 1); // update the big child and keep it
+
+    for (int v : adj[u]) 
+        if (v != p && v != bigChild) 
+            for (int i = in[v] ;i < in[v] + sz[v] ;i++)
+                update(e[i]);
+
+    update(u); // update the current node
+    
+    // answer queries for the current node
+
+    if (!keep)
+        for (int i = in[u] ;i < in[u] + sz[u] ;i++)
+            update(e[i]);
+}

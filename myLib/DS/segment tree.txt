@@ -1,0 +1,73 @@
+class segtree {
+    struct node {
+        int v = ...;  // node content
+        inline node operator +(const node &other) const {
+            node ret;
+            // combine this node with other node
+            return ret;
+        }
+    };
+
+
+    inline int left(int p) { return p << 1; }
+    inline int right(int p) { return (p << 1) + 1; }
+
+    int n;
+    vector<node> tree;
+
+    void build(int l, int r, int p, const vector<int> &v) {
+        if (l == r) {
+            tree[p].v = v[l];
+            return;
+        }
+        int mid = (l + r) >> 1;
+        build(l, mid, left(p), v);
+        build(mid + 1, r, right(p), v);
+        tree[p] = tree[left(p)] + tree[right(p)];
+    }
+
+    void update (int i , int v , int l, int r, int p) {
+        if (i > r || i < l)
+            return;
+
+        if (l == r) {
+            tree[p].v = v;
+            return;
+        }
+
+        int mid = (l + r) >> 1;
+        update(i , v , l, mid, left(p));
+        update(i , v ,  mid + 1, r, right(p));
+        tree[p] = tree[left(p)] + tree[right(p)];
+    }
+
+    node query(int s , int e , int l , int r , int p) {
+        if (l >= s && r <= e) return tree[p];
+        int mid = (l + r) >> 1;
+        if (e <= mid)
+            return query(s , e , l , mid , left(p));
+        else if (s > mid)
+            return query(s , e , mid + 1 , r , right(p));
+        return query(s , e , l , mid , left(p)) + query(s , e , mid + 1 , r , right(p));
+    }
+
+public:
+    segtree(int _n) : n(_n) {tree.resize(4 * n);} // will need to build if every leaf has it's own initalization
+    segtree(const vector<int> &v) : n(v.size()) {
+        tree.resize(4 * n);
+        build(0, n - 1, 1, v);
+    }
+
+    void update(int p, int v) {
+        update(p , v, 0, n - 1, 1);
+    }
+
+    node query(int p) {
+        return query(p, p, 0, n - 1, 1);
+    }
+
+    node query(int s, int e) {
+        // make sure s <= e
+        return query(s, e, 0, n - 1, 1);
+    }
+};

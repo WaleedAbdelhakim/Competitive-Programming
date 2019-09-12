@@ -1,0 +1,88 @@
+#include <bits/stdc++.h>
+//#include <ext/pb_ds/assoc_container.hpp>
+//#include <ext/pb_ds/tree_policy.hpp>
+
+//using namespace __gnu_pbds;
+using namespace std;
+
+//template <typename T>
+//using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
+
+typedef vector<int> vi;
+typedef long long ll;
+
+#define pb push_back
+#define inf 0x3f3f3f3f
+#define all(v) (v).begin() , (v).end()
+#define ones(n) __builtin_popcount(n)
+#define watch(x) cout << (#x) << " is " << (x) << endl
+
+int di[] = {0, 0, 1, -1, 1, 1, -1, -1};
+int dj[] = {1, -1, 0, 0, -1, 1, 1, -1};
+
+
+/* blackBox
+   update N and M acording to the problem	
+   adj is the undirected tree
+   don't forget to clear it every test case
+*/
+
+const int N = 1e5 + 5, M = 18; // update according to the problem
+int n;
+vi adj[N];
+int occ[N], E[2 * N], L[2 * N], table[M][2 * N], LG[2 * N], sz = 0;
+
+void dfs(int node = 1, int par = -1, int level = 0) {
+    table[0][sz] = sz;
+    occ[node] = sz;
+    E[sz] = node;
+    L[sz++] = level;
+    for (int child : adj[node]) {
+        if (child == par) continue;
+        dfs(child, node, level + 1);
+        E[sz] = node;
+        table[0][sz] = sz;
+        L[sz++] = level;
+    }
+}
+
+// build the sparse table to get the position of the minmum value
+void build() {
+    sz = 0;
+    dfs();
+
+    for (int j = 1; j <= M; j++) {
+        for (int i = 0; i + (1 << j) - 1 < sz; i++) {
+            int f = table[j - 1][i];
+            int s = table[j - 1][i + (1 << (j - 1))];
+            table[j][i] = L[f] < L[s] ? f : s;
+        }
+    }
+}
+
+int RMQ(int l, int r) {
+    if (r < l)
+        swap(l, r);
+    int lg = LG[r - l + 1];
+    int f = table[lg][l];
+    int s = table[lg][r - (1 << lg) + 1];
+    return L[f] < L[s] ? E[f] : E[s];
+}
+
+int LCA(int a, int b) { 
+    return RMQ(occ[a], occ[b]);
+}
+
+void init() {
+    LG[0] = -1;
+    for (int i = 1; i < 2 * N; i++)
+        LG[i] = LG[i - 1] + !(i - (i & (-i)));
+}
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+#endif
+    init(); // only once through all test cases
+    build(); // every test case
+}

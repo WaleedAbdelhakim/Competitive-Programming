@@ -1,0 +1,29 @@
+bool overflow(long long a, long long b) {
+    long double res = a * b;
+    if (a == 0 || b == 0 || res / b == a)
+        return false;
+    return true;
+}
+long long nth_root(long long x , int n) {
+    long long l = 1 , r = x , theOne = -1;
+    while (l <= r) {
+        long long mid = (l + r) / 2 , ans = 1;
+        bool ovf = 0;
+        for (int i = 0 ;i < n ;i++) {
+            ovf |= overflow(ans , mid);
+            ans *= mid;
+        }
+
+        if (ans == x) {
+            theOne = mid;
+            break;
+        }
+
+        if (ovf || ans >= x)
+            r = mid - 1;
+        else
+            l = mid + 1;
+    }
+
+    return theOne;
+}

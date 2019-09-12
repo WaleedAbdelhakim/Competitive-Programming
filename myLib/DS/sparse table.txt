@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+const int N = 2e5 + 5 , M = 19;
+int table[M][N] , a[N] , LG[N] , n;
+
+void build() {
+    for (int i = 0 ;i < N ;i++)
+        table[0][i] = i;
+
+    for (int j = 1; j <= M; j++) {
+        for (int i = 0; i + (1 << j) - 1 < n; i++) {
+            int f = table[j - 1][i];
+            int s = table[j - 1][i + (1 << (j - 1))];
+            table[j][i] = a[f] < a[s] ? f : s;
+        }
+    }
+}
+
+int Min(int l, int r) {
+    int lg = LG[r - l + 1];
+    int f = table[lg][l];
+    int s = table[lg][r - (1 << lg) + 1];
+    //return a[f] < a[s] ? f : s;      for min index
+    return min(a[f] , a[s]); // for min value
+}
+
+void init() {
+    LG[0] = -1;
+    for (int i = 1; i < N; i++)
+        LG[i] = LG[i - 1] + !(i - (i & (-i)));
+}
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("input.in", "r", stdin);
+#endif
+    init(); // once over all test cases
+    build(); // every test case
+}

@@ -1,0 +1,17 @@
+const long long MOD = 1e9 + 7; // have to be a prime
+
+long long mul(long long a , long long b) {
+    return a * b % MOD;
+}
+
+long long power(long long a , long long b) {
+    if (!b) return 1;
+    long long r = power(a , b / 2);
+    r = mul(r , r);
+    if (b&1) return mul(r , a);
+    return r;
+}
+
+long long mod_inv(long long x) {
+    return power(x , MOD - 2);
+}

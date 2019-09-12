@@ -1,0 +1,64 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+const int B1 = 256;
+const int B2 = 128;
+const int MOD1 = 2000000011;
+const int MOD2 = 1000000007;
+const int N = 1e5 + 5;
+
+char s[N];
+
+int mul(int a , int b , int m) {
+    return a * 1ll * b % m;
+}
+
+int add(long long a , int b , int m) {
+    a += b;
+    while (a >= m)a -= m;
+    while (a < 0) a += m;
+    return a;
+}
+
+pair<int, int> prefix[N];
+void hash_prefix() {
+    int h1, h2;
+    h1 = h2 = 0;
+    for (int i = 0; s[i]; i++) {
+        h1 = ((1LL * h1 * B1) % MOD1 + s[i]) % MOD1;
+        h2 = ((1LL * h2 * B2) % MOD2 + s[i]) % MOD2;
+        prefix[i] = make_pair(h1, h2);
+    }
+}
+
+pair<int, int> suffix[N];
+void hash_suffix(){
+    int h1 , h2 , pw1 , pw2;
+    h1 = h2 = 0;
+    pw1 = pw2 = 1;
+    int sz = strlen(s);
+    for(int i = sz-1 ; i>=0;i--){
+        h1 = (h1 + (1LL * pw1 * s[i])%MOD1 )%MOD1;
+        h2 = (h2 + (1LL * pw2 * s[i])%MOD2 )%MOD2;
+        pw1 = (1LL*pw1*B1)%MOD1;
+        pw2 = (1LL*pw2*B2)%MOD2;
+        suffix[i] = {h1 , h2};
+    }
+}
+
+int p[N] , pp[N];
+void pre() { // one time for all test cases
+    p[0] = pp[0] = 1;
+    for (int i = 1 ;i < N ;i++) {
+        p[i] = mul(p[i - 1] , B1 , MOD1);
+        pp[i] = mul(pp[i - 1] , B2 , MOD2);
+    }
+}
+
+pair<int , int> get(int l , int r) {
+    if (!l) return prefix[r];
+    int len = r - l + 1;
+    return {add(prefix[r].first , -mul(p[len] , prefix[l - 1].first , MOD1) , MOD1)
+            , add(prefix[r].second, -mul(pp[len] , prefix[l - 1].second , MOD2) , MOD2)};
+}

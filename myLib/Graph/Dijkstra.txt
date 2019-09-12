@@ -1,0 +1,48 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+const int N = 1e5 + 5;
+
+struct edge {
+    int to;
+    long long cost;
+};
+
+struct path {
+    int node;
+    long long cost;
+    bool operator < (const path &other) const {
+        return cost > other.cost;
+    }
+};
+
+bool known[N];
+long long dist[N];
+vector<edge> adj[N];
+
+void Dijkstra(int s) {
+    priority_queue<path> pq;
+    memset(known , 0 , sizeof known);
+    memset(dist , 63 , sizeof dist);
+
+    pq.push({s , 0});
+    dist[s] = 0;
+
+    while (pq.size()) {
+        int node = pq.top().node;
+        long long cost = pq.top().cost;
+        pq.pop();
+
+        if (known[node]) continue;
+        known[node] = 1;
+
+        for (auto &c : adj[node]) {
+            if (dist[c.to] > dist[node] + c.cost) {
+                dist[c.to] = dist[node] + c.cost;
+                pq.push({c.to , dist[c.to]});
+            }
+        }
+    }
+
+}

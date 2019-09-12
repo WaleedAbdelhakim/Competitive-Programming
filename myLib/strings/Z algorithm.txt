@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+vector<int> Z(string s) {
+    vector<int> z(s.size() , 0);
+    int l = 0 , r = 0;
+    for (int i = 1 ;i < s.size() ;i++) {
+        if (i <= r)
+            z[i] = min(z[i - l] , r - i + 1);
+
+        while (i + z[i] < s.size() && s[i + z[i]] == s[z[i]])
+            z[i]++;
+
+        if (i + z[i] - 1 > r)
+            l = i , r = i + z[i] - 1;
+    }
+
+    return z;
+}
+int main() {
+    string patt = "aab";
+    string str = "abbaaabbab";
+    vector<int> x = Z(patt + "$" + str); // $ removes unnecessary comparisons
+}
