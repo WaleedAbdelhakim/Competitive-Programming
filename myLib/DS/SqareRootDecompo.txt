@@ -1,25 +1,25 @@
-struct block {
-    int lazy = 0;
-    vector<pair<int , int> > v;
-
-    void update() {
-        // update the whole block
-    }
-
-    void update(int l , int r) {
-        // update a range in the block
-    }
-
-    int get() {
-        // query about the whole block
-    }
-
-    int get(int l , int r) {
-        // query about a range in the block
-    }
-};
-
 struct SqareRootDecompo {
+    struct block {
+        int lazy = 0;
+        vector<pair<int , int> > v;
+
+        void update() {
+            // update the whole block
+        }
+
+        void update(int l , int r) {
+            // update a range in the block
+        }
+
+        int get() {
+            // query about the whole block
+        }
+
+        int get(int l , int r) {
+            // query about a range in the block
+        }
+    };
+    
     int n , bsz , bcnt;
     vector<block> blocks;
 
