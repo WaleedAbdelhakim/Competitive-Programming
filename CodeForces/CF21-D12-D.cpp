@@ -1,3 +1,25 @@
+// explanation : 
+// first we say there is no solution if there is an edge that is not reachable 
+// from node 1 and we can check this using a simple dfs
+// otherwise there is at least one solution and we need to get the cheapest one
+
+// in the best case every node will have an even degree so that we can make 
+// an euler cycle walking through every edge exactly once 
+// with an answer equal to the sum of all costs on edges
+
+// now about nodes with odd degrees
+// it is guranteed that there are even number of them
+// we will try to make the graph valid for euler cycle 
+// by adding edges connecting pairs of nodes with an odd degrees
+// with a cost equal to the shortest path between them
+// that will make them both have even degrees
+
+// so the answer will be that we need to find the optimal
+// matching of nodes with odd degrees so that the sum of 
+// old edges plus new edges are as small as possible 
+// we will do this using dp
+// complexity O(2 ^ n * n)
+
 #include <bits/stdc++.h>
 
 using namespace std;
