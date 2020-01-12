@@ -11,10 +11,10 @@ void dfs (int node) {
         dfs(c);
 
     if (adj[node].empty()) {
-        dp[node][0] = nc;
-        dp[node][3] = sc;
-        dp[node][1] = 0;
+        dp[node][0] = sc;
+        dp[node][1] = nc;
         dp[node][2] = 0;
+        dp[node][3] = 0;
         return;
     }
 
@@ -26,17 +26,17 @@ void dfs (int node) {
         sum3 += dp[c][3];
     }
 
-    dp[node][0] = min(sum1 + nc , sum3);
-    dp[node][1] = min(sum1 + nc , min(sum0 , sum2 + sc));
-    dp[node][2] = min(sum2 + sc , sum1);
-    dp[node][3] = sum2 + sc;
+    dp[node][0] = sum3 + sc;
+    dp[node][1] = min(sum2 + nc , sum0);
+    dp[node][2] = min(sum2 + nc , min(sum1 , sum3 + sc));
+    dp[node][3] = min(sum3 + sc , sum2);
 
     for (int c: adj[node]) {
-        int cur = sc + sum1 - dp[c][1];
+        int cur = sc + sum2 - dp[c][2];
         for (int c2 : adj[c])
-            cur += dp[c2][2];
+            cur += dp[c2][3];
+        dp[node][2] = min(dp[node][2] , cur);
         dp[node][1] = min(dp[node][1] , cur);
-        dp[node][0] = min(dp[node][0] , cur);
     }
 }
 
@@ -63,11 +63,10 @@ void solve () {
     dfs(1 , 1);
     dfs(1);
 
-    cout << dp[1][1] << '\n';
+    cout << dp[1][2] << '\n';
 }
 
 int main() {
-    freopen("input.in" , "r" , stdin);
     ios::sync_with_stdio(0) , cin.tie(0) , cout.tie(0);
     while (cin >> n >> nc >> sc , n)
         solve();
