@@ -35,8 +35,8 @@ void dfs (int node) {
         int cur = sc + sum2 - dp[c][2];
         for (int c2 : adj[c])
             cur += dp[c2][3];
-        dp[node][2] = min(dp[node][2] , cur);
         dp[node][1] = min(dp[node][1] , cur);
+        dp[node][2] = min(dp[node][2] , cur);
     }
 }
 
