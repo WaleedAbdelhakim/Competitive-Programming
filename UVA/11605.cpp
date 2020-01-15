@@ -49,8 +49,8 @@ void run_case(int t) {
                 double in = 1.0 * my_sub_grids / all;
                 double out = 1 - in;
                 mat t;
-                t.a[0][1] = t.a[1][0] = in;
-                t.a[0][0] = t.a[1][1] = out;
+                t[0][1] = t.a[1][0] = in;
+                t[0][0] = t.a[1][1] = out;
                 ans += (t ^ k)[0][1];
             }
         }
