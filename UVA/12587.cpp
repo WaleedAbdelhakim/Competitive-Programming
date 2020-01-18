@@ -1,3 +1,19 @@
+/*
+    first of all, we only care about bridges     
+    since other edges will have a maintaining cost = 0
+    so we will compress each SCC in a node and connect these nodes with bridges
+    the resulting graph will be a forest(set of trees)
+    after that, we will binary search the answer in the range [max initial maintaining cost of a town, 1e18]
+    and validate whether if we can give the responsibility of edges such 
+    that max maintaining cost of a town <= current med
+    we will do this using a greedy algorithm and we will do it for each tree in the forest
+    let mn[u] = be the minimum maintaining cost of node u after giving the responsibility of every edge in its subtree
+    so let's say you are currently at node u and now you want to calculate mn[u]
+    mn[u] will be initially equal to the maintaining cost of node u
+    and for each child v if mn[v] + cost[u][v] < mid the responsibility will be given to v
+    otherwise, u will be responsible for it
+*/
+
 #include <bits/stdc++.h>
 
 using namespace std;
