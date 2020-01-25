@@ -1,9 +1,0 @@
-long long nCr(int n, int r) {
-    long long ret = 1;
-    r = max(r , n - r);
-    for (int i = 1; i <= n - r; ++i) {
-        ret *= r + i;
-        ret /= i;
-    }
-    return ret;
-}
